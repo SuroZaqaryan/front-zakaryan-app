@@ -1,0 +1,71 @@
+#document .document__title,
+#document .document__create,
+#document .document__search,
+#document .document__search > div,
+#document button {
+  display: flex;
+  align-items: center;
+}
+
+#document {
+  max-width: 1366px;
+  height: 500px;
+  margin: auto;
+  padding: 2rem 1.5rem; 
+  background-color: #fff;
+}
+
+#document .document__title {
+  flex-wrap: wrap;
+}
+
+.document__title {
+  margin-bottom: 16px;
+  justify-content: space-between;
+}
+
+.document__create {
+  gap: 16px;
+}
+
+.document__create .bookmark {
+  padding: 3px;
+  border-radius: 100%;
+}
+
+.document__title button {
+  border-radius: 32px;
+  padding: 6px 10px;
+  border: 1px solid #b8b8b8;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.document__title button b {
+  margin-left: 8px;
+}
+
+.document__search > div {
+  position: relative;
+  width: 40%;
+}
+
+.document__search > div .remove,
+.document__search > div .search {
+  position: absolute;
+  max-width: 100%;
+}
+
+.document__search > div .remove {
+  right: 0;
+  cursor: pointer;
+}
+
+.document__search > div input {
+  width: 100%;
+  outline: none;
+  border: none;
+  padding: 8px 30px;
+  border-bottom: 2px solid #0066ff;
+  font-weight: 600;
+}

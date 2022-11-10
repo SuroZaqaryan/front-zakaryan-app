@@ -1,0 +1,26 @@
+.document__category {
+    margin-top: 1rem;
+}
+
+.document__category .category__title {
+    margin-bottom: 16px;
+    padding: 13px;
+    border: 1px solid #8e9cbb;
+    cursor: pointer;
+}
+
+.document__category .category__title > div {
+    display: flex;
+    align-items: center;
+}
+
+.document__category .category__title h3 {
+    margin-right: 8px;
+}
+
+.document__category .category__title button {
+    margin-right: 16px;
+    border-radius: 100%;
+    border: 1px solid;
+    cursor: pointer;
+}
