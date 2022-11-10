@@ -10,7 +10,7 @@
 #document {
   max-width: 1366px;
   height: 500px;
-  margin: auto;
+  margin: 2rem auto;
   padding: 2rem 1.5rem; 
   background-color: #fff;
 }
@@ -31,6 +31,12 @@
 .document__create .bookmark {
   padding: 3px;
   border-radius: 100%;
+  width: 27px;
+  min-height: 27px;
+}
+
+.document__create .bookmark img {
+  margin: auto;
 }
 
 .document__title button {
@@ -43,29 +49,4 @@
 
 .document__title button b {
   margin-left: 8px;
-}
-
-.document__search > div {
-  position: relative;
-  width: 40%;
-}
-
-.document__search > div .remove,
-.document__search > div .search {
-  position: absolute;
-  max-width: 100%;
-}
-
-.document__search > div .remove {
-  right: 0;
-  cursor: pointer;
-}
-
-.document__search > div input {
-  width: 100%;
-  outline: none;
-  border: none;
-  padding: 8px 30px;
-  border-bottom: 2px solid #0066ff;
-  font-weight: 600;
 }
