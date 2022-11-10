@@ -1,8 +1,11 @@
 .document__category {
-    margin-top: 1rem;
+    margin-top: 1.5rem;
 }
 
 .document__category .category__title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: 16px;
     padding: 13px;
     border: 1px solid #8e9cbb;
@@ -19,8 +22,19 @@
 }
 
 .document__category .category__title button {
+    height: 23px;
     margin-right: 16px;
     border-radius: 100%;
     border: 1px solid;
     cursor: pointer;
+}
+
+.document__category .category__controls button {
+    background-color: transparent;
+    border: none;
+    margin: 0;
+}
+
+.document__category .category__controls .draggable {
+    transform: rotate(90deg);
 }
