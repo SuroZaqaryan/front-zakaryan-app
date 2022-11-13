@@ -2,19 +2,35 @@
   <div class="document__search">
     <div>
       <img class="search" src="@/assets/search.svg" width="17" height="17" alt="search" />
-      <input type="text" />
-      <img class="remove" src="@/assets/remove.svg" width="21" height="21" alt="remove" />
+
+      <input type="text" v-model="search" ref="search" />
+
+      <img @click="remove" class="remove" src="@/assets/remove.svg" width="21" height="21" alt="remove" />
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
 export default {
   name: "Search",
 
-  computed: mapGetters(["searchValue"])
+  computed: {
+    search: {
+      get() {
+        return this.$store.state.searchValue
+      },
+      set(value) {
+        this.$store.dispatch('updateSearch', value)
+      }
+    }
+  },
+
+  methods: {
+    remove() {
+      this.search = ''
+      this.$refs.search.value = ''
+    },
+  }
 };
 </script>
 

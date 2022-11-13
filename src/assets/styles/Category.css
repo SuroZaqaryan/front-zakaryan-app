@@ -1,24 +1,21 @@
-.document__category {
-    margin-top: 1.5rem;
+.item-sub .category__info {
+    border-top: 0;
 }
 
-.document__category .category__title {
-    margin-bottom: 16px;
-}
-
-.document__category .open .arrow,
-.document__category .close .arrow {
+.open .arrow,
+.close .arrow {
     transition: 0.3s;
 }
 
-.document__category .open .arrow {
+.open .arrow {
     transform: rotate(180deg);
 }
-.document__category .close .arrow {
+
+.close .arrow {
     transform: rotate(0deg);
 }
 
-.document__category .category__info {
+.category__info {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -27,25 +24,44 @@
     cursor: pointer;
 }
 
-.document__category .category__info > div {
+.category__info>div {
     display: flex;
     align-items: center;
 }
 
-.document__category .category__info button {
+.category__info button {
     width: 25px;
-    min-height: 25px;;
+    min-height: 25px;
+    ;
 }
 
-.document__category .category__info button img {
+.category__info button img {
     margin: auto;
 }
 
-.document__category .category__title h3 {
+.category__items input,
+.category__title input {
+    padding: 0;
+    font-weight: 600;
+    background-color: transparent;
+    color: #000000;
+    outline: none;
+    border: none;
+}
+
+.category__title input {
+    font-size: 18px;
+}
+
+.category__items input {
+    font-size: 16px;
+}
+
+.category__title h3 {
     margin-right: 8px;
 }
 
-.document__category .category__title button {
+.category__title button {
     height: 23px;
     margin-right: 16px;
     border-radius: 100%;
@@ -54,27 +70,30 @@
     cursor: pointer;
 }
 
-.document__category .category__controls button {
+.category__controls {
+    display: flex;
+    align-items: center;
+}
+
+.category__controls button {
     background-color: transparent;
     border: none;
     margin: 0;
 }
 
-.document__category .category__controls .draggable {
+.category__controls .draggable {
     transform: rotate(90deg);
 }
 
-.document__category .category__items ul li {
+.category__items ul li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     list-style-type: none;
-    border: 1px solid;
-    padding: 1rem;
+    padding: 16px 13px;
     border: 1px solid #8e9cbb;
 }
 
-.document__category .category__items ul li:first-child {
+.category__items ul li:first-child {
     border-top: 0;
-}
-
-.document__category .category__items ul li:not(:last-child) {
-    border-bottom: 0;
 }
