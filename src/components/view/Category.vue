@@ -1,113 +1,176 @@
-<style scoped>
-.item-container {
-  max-width: 100%;
-  margin: 0;
-}
-
-.item {
-  padding: 1rem;
-}
-
-.item-sub {
-  margin: 0 0 0 1rem;
-}
-</style>
-
 <template>
-  <!-- <draggable v-bind="dragOptions" tag="div" class="item-container" :list="list" :value="value" @input="emitter">
-    <div class="item-group" :key="el.id" v-for="el in realValue">
-      <div class="item">{{ el.title }}</div>
-      <nested-test class="item-sub" :list="el.elems" />
+  <div class="category">
+    <div>
+      <i class="fa-solid fa-chevron-down"></i>
     </div>
-  </draggable> -->
+    <v-layout wrap>
+      <v-flex mb-5 xs12>
+        <v-card>
+          <v-card-text>
+            <v-draggable-treeview
+              v-model="items"
+              group="categories"
+              :empty-insert-threshhold="500"
+              @drop.native="dragend($event)"
+            >
+              <!-- <template v-slot:prepend="{ item }">
+                <div
+                  @click="test"
+                  style="background: red; width: 20px; height: 20px"
+                >
+                  <v-icon>{{ item.icon }}</v-icon>
+                </div>
+              </template> -->
 
-  <draggable v-bind="dragOptions" :group="{ name: 'g1' }" tag="div" class="item-container" :list="list" :value="value"
-    @input="emitter">
-    <div :key="category.id" v-for="category in realValue" class="document__category">
-      <div class="category__title">
-        <div class="category__info item">
-          <div>
-            <button @click="openCategory(category.id)">
-              <img class="arrow" src="@/assets/arrow.svg" width="8" height="13" />
-            </button>
-            <div>
-              <input type="text" v-model="category.title" :disabled="category.edit">
-            </div>
-          </div>
-          <Controls :item="category" type="category" handle="handle" />
-        </div>
-        <div class="category__items">
-          <collapse-transition>
-            <nested-test class="item-sub" :list="category.elems" />
-            <!-- <div v-show="category.open" class="category__items">
-              <ul>
-                <transition-group type="transition">
-                  <li v-for="(elem, idx) in category.elems.filter((x) => x.categoryId === category.id)" :key="idx">
-                    <input type="text" v-model="elem.title" :disabled="elem.edit">
-                    <Controls @drag-start="dragStart($event, elem)" :item="category" :itemChild="elem" type="elem" />
-                  </li>
-                </transition-group>
-              </ul>
-            </div> -->
-          </collapse-transition>
-        </div>
+              <template v-slot:prepend="{ item }">
+                <v-icon>{{ item.icon }}</v-icon>
+              </template>
 
-      </div>
-    </div>
-  </draggable>
+              <template v-slot:label="{ item }">
+                <span :id="item.id" class="primary--text">{{ item.name }}</span>
+              </template>
+
+              <template v-slot:append="{ item }">
+
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on }">
+                    <v-icon
+                      v-on="on"
+                      small
+                      class="mr-2"
+                      @click.stop="ajouter(item)"
+                      v-if="!item.link"
+                    >
+                      mdi-folder
+                    </v-icon>
+                  </template>
+                  <span>Ajouter un menu</span>
+                </v-tooltip>
+
+                <v-tooltip bottom>
+
+                  <template v-slot:activator="{ on }">
+                    <v-icon
+                      v-on="on"
+                      small
+                      class="mr-2"
+                      @click.stop="ajouterSousMenu(item, $event)"
+                      v-if="!item.link"
+                    >
+                      mdi-plus
+                    </v-icon>
+                  </template>
+
+                  <span>Ajouter un sous-menu</span>
+                </v-tooltip>
+                <Controls />
+                <!-- <v-icon small class="mr-2" @click.stop=""> edit </v-icon>
+                <v-icon small class="mr-2" @click.stop=""> mdi-delete </v-icon> -->
+              </template>
+            </v-draggable-treeview>
+          </v-card-text>
+        </v-card>
+      </v-flex>
+    </v-layout>
+  </div>
 </template>
 
 <script>
-import draggable from "vuedraggable";
-import CollapseTransition from "@ivanv/vue-collapse-transition"
-import Controls from "./Controls.vue"
+import Controls from "./Controls.vue";
 
 export default {
-  name: "nested-test",
-  methods: {
-    emitter(value) {
-      this.$emit("input", value);
-    },
+  name: "TestComp",
+  data: () => ({
+    items: [
+      {
+        id: 1,
+        name: "Central League",
+        icon: "fa-solid fa-chevron-down",
+        link: "",
+        children: [
+          { id: 101, name: "Dragons", icon: "", link: "test" },
+          { id: 102, name: "Tigers", icon: "", link: "test" },
+        ],
+      },
+      {
+        id: 2,
+        name: "Pacific League",
+        icon: "fa-solid fa-chevron-down",
+        link: "",
+        children: [
+          {
+            id: 7,
+            name: "Lions",
+            link: "",
+          },
+        ],
+      },
+    ],
+    hoverParent: false,
+    hoverChild: false,
+    i: 0,
+  }),
 
-    openCategory(currentIndex) {
-      this.$store.dispatch("openCategory", currentIndex);
-    },
-  },
   components: {
-    draggable,
-    CollapseTransition,
-    Controls
+    Controls,
   },
-  computed: {
-    dragOptions() {
-      return {
-        animation: 0,
-        group: "description",
-        disabled: false,
-        ghostClass: "ghost"
-      };
-    },
 
-    realValue() {
-      return this.value ? this.value : this.list;
-    }
-  },
-  props: {
-    value: {
-      required: false,
-      type: Array,
-      default: null
+  computed: {
+    clonedItems: function () {
+      return JSON.parse(JSON.stringify(this.items));
     },
-    list: {
-      required: false,
-      type: Array,
-      default: null
-    }
-  }
+  },
+
+  watch: {
+    clonedItems: {
+      deep: true,
+      handler(newVal, oldVal) {
+        console.log(newVal);
+        console.log(oldVal);
+      },
+    },
+  },
+  methods: {
+    test() {
+      console.log(1);
+    },
+    ajouterMenu() {
+      this.items.push({
+        id: 3,
+        name: "Test",
+        icon: "fa-solid fa-chevron-down",
+        link: "",
+        children: [],
+      });
+    },
+    ajouterSousMenu(item, event) {
+      item.children.push({
+        id: 301,
+        name: "Test",
+        icon: "",
+        link: "test",
+        children: [],
+      });
+      event.target.parentNode.click();
+      console.log(event.target.parentNode.parentNode);
+      console.log(event.target.parentNode);
+      console.log(event.target.parentNode.nextSibling);
+    },
+    dragstart(event) {
+      console.log(event);
+    },
+    dragend(event) {
+      var id = event.target.getElementsByClassName("primary--text")[0].id;
+      if (id !== "") {
+        console.log(id);
+      } else {
+        console.log(event.target);
+      }
+    },
+  },
 };
 </script>
 
 <style scoped>
 @import "../../assets/styles/Category.css";
 </style>
-

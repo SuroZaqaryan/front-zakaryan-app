@@ -37,7 +37,6 @@ export default {
         },
 
         EDIT_CATEGORY(state, payload) {
-            console.log(state)
             switch (payload.type) {
                 case 'category':
                     payload.item.edit = false

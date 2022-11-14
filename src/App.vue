@@ -1,18 +1,15 @@
 <template>
-  <div id="app">
+  <v-app>
     <Document />
-  </div>
+  </v-app>
 </template>
 
 <script>
-import Document from './components/Document.vue'
-
 export default {
-  name: 'App',
   components: {
-    Document
-  }
-}
+    Document: () => import("./components/Document.vue"),
+  },
+};
 </script>
 
 <style>

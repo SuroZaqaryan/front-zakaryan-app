@@ -1,3 +1,7 @@
+/* .category .v-treeview-node__root .v-treeview-node__toggle {
+    display: none;
+} */
+
 .item-sub .category__info {
     border-top: 0;
 }
