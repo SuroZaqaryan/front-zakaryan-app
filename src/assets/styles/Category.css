@@ -36,10 +36,22 @@
     transform: rotate(180deg);
 }
 
-.category .v-treeview-node__root input {
+.category .v-treeview-node__root .category__field {
     width: 50%;
     padding: 5px;
     outline: none;
+    color: #000000;
+}
+
+.category .v-treeview-node__root .category__field {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.category .v-treeview-node__children .category__field {
+    font-size: 15px;
+    font-weight: 600;
+    font-family: system-ui;
 }
 
 .category .v-treeview-node__children .v-treeview-node {

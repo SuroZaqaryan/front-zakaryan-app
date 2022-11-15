@@ -5,21 +5,24 @@
         <v-card>
           <v-card-text class="pa-0">
             <v-draggable-treeview v-model="items" group="categories"
-              @drop.native="dragend($event)" v-click-outside="onClickOutside">
+                                  @drop.native="dragend($event)" v-click-outside="onClickOutside">
 
               <template v-slot:label="{ item }">
-                <input type="text" :id="item.id" :disabled="item.edit" :class="item.edit ? 'disabled' : 'editabled'"
-                  class="primary--text" v-model="item.name" />
+                <div>
+                  <input type="text" :id="item.id" :disabled="item.edit" :class="item.edit ? 'disabled' : 'editabled'"
+                         class="category__field" v-model="item.name"/>
+                  <span>111</span>
+                </div>
               </template>
 
               <template v-slot:append="{ item }">
-                <Controls :item="item" :type="item.type" handle="handle" />
+                <Controls :item="item" :type="item.type" handle="handle"/>
               </template>
 
             </v-draggable-treeview>
           </v-card-text>
         </v-card>
-      </v-flex>
+        </v-flex>
     </v-layout>
     <pre>{{ items }}</pre>
   </div>
