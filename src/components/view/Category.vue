@@ -5,27 +5,17 @@
         <v-flex mb-5 xs12>
           <v-card>
             <v-card-text class="pa-0">
-              <v-draggable-treeview
-                  v-model="items"
-                  group="categories"
-                  @drop.native="dragend($event)"
-                  v-click-outside="onClickOutside"
-              >
+              <v-draggable-treeview v-model="items" group="categories" @drop.native="dragend($event)"
+                v-click-outside="onClickOutside">
                 <template v-slot:label="{ item }">
                   <div class="d-flex align-center category_field">
                     <div>
-                      <p class="category__field" v-if="item.edit">
+                      <p class="category__field category__field-name" v-if="item.edit">
                         {{ item.name }}
                       </p>
                       <form v-else action="">
-                        <input
-                            type="text"
-                            :id="item.id"
-                            :disabled="item.edit"
-                            :class="item.edit ? 'disabled' : 'editabled'"
-                            class="category__field"
-                            v-model="item.name"
-                        />
+                        <input type="text" :id="item.id" :disabled="item.edit"
+                          :class="item.edit ? 'disabled' : 'editabled'" class="category__field" v-model="item.name" />
                       </form>
                     </div>
 
@@ -39,7 +29,7 @@
                 </template>
 
                 <template v-slot:append="{ item }">
-                  <Controls :item="item" :type="item.type" handle="handle"/>
+                  <Controls :item="item" :type="item.type" handle="handle" />
                 </template>
               </v-draggable-treeview>
             </v-card-text>
@@ -48,7 +38,7 @@
       </v-layout>
       <p v-if="!items.length">Нету таких результатов</p>
     </div>
-    <Elems/>
+    <Elems />
     <pre>{{ items }}</pre>
   </div>
 </template>
@@ -92,8 +82,9 @@ export default {
         });
       });
     },
+
     dragend(event) {
-      let id = event.target.getElementsByClassName("primary--text")[0].id;
+      let id = event.target.getElementsByClassName("category__field-name")[0].id;
       if (id !== "") {
         console.log(id);
       } else {
