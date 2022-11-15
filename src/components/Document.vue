@@ -10,7 +10,7 @@
           <img width="14" height="14" src="../assets/bookmark.svg" alt="bookmark" />
         </button>
 
-        <button>
+        <button @click="createCategory">
           <img src="../assets/add.svg" width="17" height="17" alt="add" />
           <b>Новый тип</b>
         </button>
@@ -40,6 +40,12 @@ export default {
     Category,
     Search,
   },
+
+  methods: {
+    createCategory() {
+      this.$store.dispatch("createCategory")
+    },
+  }
 };
 </script>
 

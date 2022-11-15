@@ -3,7 +3,7 @@ import store from "./store";
 import App from "./App.vue";
 import vClickOutside from 'v-click-outside'
 import Vuetify from "vuetify";
-import VuetifyDraggableTreeview from "vuetify-draggable-treeview";
+import VuetifyDraggableTreeview from "./js/vuetify-draggable-treeview";
 import "vuetify/dist/vuetify.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 

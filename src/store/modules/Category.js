@@ -16,7 +16,12 @@ export default {
 
         updateSearch({commit}, payload) {
             commit("UPDATE_SEARCH", payload)
+        },
+
+        createCategory({commit}) {
+            commit("CREATE_CATEGORY")
         }
+
     },
 
     mutations: {
@@ -66,6 +71,23 @@ export default {
 
         UPDATE_SEARCH(state, payload) {
             state.searchValue = payload
+        },
+
+        CREATE_CATEGORY(state) {
+            state.items.push({
+                    id: uuid.v1(),
+                    name: "Новая категория",
+                    icon: "fa-solid fa-chevron-down",
+                    type: "category",
+                    edit: true,
+                    children: [
+                        {id: uuid.v1(), name: "Документ 1", type: "child", edit: true,},
+                        {id: uuid.v1(), name: "Документ 2", type: "child", edit: true,},
+                        {id: uuid.v1(), name: "Документ 3", type: "child", edit: true,},
+                        {id: uuid.v1(), name: "Документ 4", type: "child", edit: true,},
+                    ],
+                },
+            )
         }
     },
 
@@ -82,8 +104,16 @@ export default {
                 edit: true,
                 colors: ['pink', 'yellow', 'orange'],
                 children: [
-                    {id: uuid.v1(), name: "Паспорт", subName: "Для всех", type: "child", colors: ['blue'], edit: true,},
-                    {id: uuid.v1(), name: "ИНН", subName: "Для всех", type: "child", edit: true,},
+                    {
+                        id: uuid.v1(),
+                        name: "Паспорт",
+                        subName: "Для всех",
+                        status: true,
+                        type: "child",
+                        colors: ['blue'],
+                        edit: true,
+                    },
+                    {id: uuid.v1(), name: "ИНН", subName: "Для всех", status: true, type: "child", edit: true,},
                 ],
             },
             {
@@ -94,10 +124,10 @@ export default {
                 type: "category",
                 edit: true,
                 children: [
-                    {id: uuid.v1(), name: "Документ 1", type: "child", edit: true,},
-                    {id: uuid.v1(), name: "Документ 2", type: "child", edit: true,},
-                    {id: uuid.v1(), name: "Документ 3", type: "child", edit: true,},
-                    {id: uuid.v1(), name: "Документ 4", type: "child", edit: true,},
+                    {id: uuid.v1(), name: "Документ 1", subName: "Для всех", status: false, type: "child", edit: true,},
+                    {id: uuid.v1(), name: "Документ 2", subName: "Для всех", status: false, type: "child", edit: true,},
+                    {id: uuid.v1(), name: "Документ 3", subName: "Для всех", status: false, type: "child", edit: true,},
+                    {id: uuid.v1(), name: "Документ 4", subName: "Для всех", status: false, type: "child", edit: true,},
                 ],
             },
             {
@@ -114,6 +144,7 @@ export default {
                 ],
             },
         ],
+
     },
 
     getters: {

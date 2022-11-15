@@ -1,52 +1,60 @@
 <template>
-  <div class="category">
-    <v-layout wrap>
-      <v-flex mb-5 xs12>
-        <v-card>
-          <v-card-text class="pa-0">
-            <v-draggable-treeview
-              v-model="items"
-              group="categories"
-              @drop.native="dragend($event)"
-              v-click-outside="onClickOutside"
-            >
-              <template v-slot:label="{ item }">
-                <div class="d-flex align-center category_field">
-                  <div>
-                    <p class="category__field" v-if="item.edit">
-                      sasadsadsadsad
-                    </p>
-                    <form v-else action="">
-                      <input
-                        type="text"
-                        :id="item.id"
-                        :disabled="item.edit"
-                        :class="item.edit ? 'disabled' : 'editabled'"
-                        class="category__field"
-                        v-model="item.name"
-                      />
-                    </form>
-                  </div>
-                  <div>
+  <div>
+    <div class="category">
+      <v-layout wrap>
+        <v-flex mb-5 xs12>
+          <v-card>
+            <v-card-text class="pa-0">
+              <v-draggable-treeview
+                  v-model="items"
+                  group="categories"
+                  @drop.native="dragend($event)"
+                  v-click-outside="onClickOutside"
+              >
+                <template v-slot:label="{ item }">
+                  <div class="d-flex align-center category_field">
+                    <div>
+                      <p class="category__field" v-if="item.edit">
+                        {{ item.name }}
+                      </p>
+                      <form v-else action="">
+                        <input
+                            type="text"
+                            :id="item.id"
+                            :disabled="item.edit"
+                            :class="item.edit ? 'disabled' : 'editabled'"
+                            class="category__field"
+                            v-model="item.name"
+                        />
+                      </form>
+                    </div>
 
-                  </div>
-                  <p class="m-0 category_subname">{{ item.subName }}</p>
-                </div>
-              </template>
+                    <ul class="d-flex align-center category_status">
+                      <li v-for="(color, idx) in item.colors" :key="idx" :class="color"> </li>
+                      <p v-if="item.status">Обязательный</p>
+                    </ul>
 
-              <template v-slot:append="{ item }">
-                <Controls :item="item" :type="item.type" handle="handle" />
-              </template>
-            </v-draggable-treeview>
-          </v-card-text>
-        </v-card>
-      </v-flex>
-    </v-layout>
+                    <p class="m-0 category_subname">{{ item.subName }}</p>
+                  </div>
+                </template>
+
+                <template v-slot:append="{ item }">
+                  <Controls :item="item" :type="item.type" handle="handle"/>
+                </template>
+              </v-draggable-treeview>
+            </v-card-text>
+          </v-card>
+        </v-flex>
+      </v-layout>
+      <p v-if="!items.length">Нету таких результатов</p>
+    </div>
+    <Elems/>
     <pre>{{ items }}</pre>
   </div>
 </template>
 
 <script>
+import Elems from "./Elems"
 import Controls from "./Controls.vue";
 
 export default {
@@ -64,10 +72,18 @@ export default {
   },
 
   components: {
+    Elems,
     Controls,
   },
 
   methods: {
+    checkColor(color) {
+      switch (color) {
+        case 'red':
+          return
+      }
+    },
+
     onClickOutside() {
       this.items.forEach((item) => {
         item.children.forEach((subItem) => {
@@ -76,30 +92,8 @@ export default {
         });
       });
     },
-    ajouterMenu() {
-      // this.items.push({
-      //   id: 3,
-      //   name: "Test",
-      //   icon: "fa-solid fa-chevron-down",
-      //   link: "",
-      //   children: [],
-      // });
-    },
-    ajouterSousMenu(item, event) {
-      // item.children.push({
-      //   id: 301,
-      //   name: "Test",
-      //   icon: "",
-      //   link: "test",
-      //   children: [],
-      // });
-      event.target.parentNode.click();
-    },
-    dragstart(event) {
-      console.log(event);
-    },
     dragend(event) {
-      var id = event.target.getElementsByClassName("primary--text")[0].id;
+      let id = event.target.getElementsByClassName("primary--text")[0].id;
       if (id !== "") {
         console.log(id);
       } else {

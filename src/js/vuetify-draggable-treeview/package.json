@@ -1,0 +1,99 @@
+{
+  "_from": "vuetify-draggable-treeview",
+  "_id": "vuetify-draggable-treeview@0.0.6",
+  "_inBundle": false,
+  "_integrity": "sha512-1m3h2z9SiSi7tSWxuDZfD6XPH+CX0Hc3OoNPz0Mjko7EST7Ya1yqpvEBGjQCWyX7zsNCJUsL9lauaNhkVQak9w==",
+  "_location": "/vuetify-draggable-treeview",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "vuetify-draggable-treeview",
+    "name": "vuetify-draggable-treeview",
+    "escapedName": "vuetify-draggable-treeview",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/vuetify-draggable-treeview/-/vuetify-draggable-treeview-0.0.6.tgz",
+  "_shasum": "22af8520aac4bdb09fbe8c280d7983196390e267",
+  "_spec": "vuetify-draggable-treeview",
+  "_where": "C:\\Vue\\front-zakaryan-app",
+  "author": {
+    "name": "suusan2go",
+    "email": "ksuzuki180@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/suusan2go/vuetify-draggable-treeview/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {},
+  "deprecated": false,
+  "description": "draggable v-treeview component",
+  "devDependencies": {
+    "@babel/core": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "@rollup/plugin-typescript": "^2.0.1",
+    "@types/jest": "^26.0.0",
+    "@typescript-eslint/eslint-plugin": "^2.10.0",
+    "@typescript-eslint/parser": "^2.10.0",
+    "@vue/test-utils": "^1.0.0-beta.30",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^26.0.1",
+    "codecov": "^3.6.1",
+    "eslint": "^6.7.2",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-vue": "^6.0.1",
+    "jest": "^25.4.0",
+    "jest-serializer-vue": "^2.0.2",
+    "prettier": "^2.0.5",
+    "rollup": "^1.27.8",
+    "rollup-plugin-buble": "^0.19.8",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-vue": "^5.1.4",
+    "ts-jest": "^25.3.1",
+    "tslib": "^2.0.0",
+    "typescript": "^3.7.3",
+    "vue": "^2.6.10",
+    "vue-jest": "^3.0.5",
+    "vue-template-compiler": "^2.6.10",
+    "vuedraggable": "^2.23.2",
+    "vuetify": "^2.2.25"
+  },
+  "homepage": "https://github.com/suusan2go/vuetify-draggable-treeview#readme",
+  "keywords": [
+    "vuetify",
+    "vuedraggable",
+    "drag",
+    "and",
+    "drop"
+  ],
+  "license": "MIT",
+  "main": "dist/v-draggable-treeview.umd.js",
+  "module": "dist/v-draggable-treeview.esm.js",
+  "name": "vuetify-draggable-treeview",
+  "peerDependencies": {
+    "vue": "*",
+    "vuedraggable": "*",
+    "vuetify": ">=2.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suusan2go/vuetify-draggable-treeview.git"
+  },
+  "scripts": {
+    "build": "npm run build:umd & npm run build:es & npm run build:unpkg",
+    "build:es": "rollup --config build/rollup.config.js --format es --file dist/v-draggable-treeview.esm.js",
+    "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/v-draggable-treeview.umd.js",
+    "build:unpkg": "rollup --config build/rollup.config.js --format iife --file dist/v-draggable-treeview.min.js",
+    "lint": "eslint --ext .ts,.js,.vue src/",
+    "test": "jest"
+  },
+  "unpkg": "dist/v-draggable-treeview.unpkg.js",
+  "version": "0.0.6"
+}

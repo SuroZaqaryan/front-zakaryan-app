@@ -15,6 +15,7 @@
 }
 
 .category .v-treeview-node__root .fa-chevron-down {
+    position: relative;
     font-size: 12px;
     transform: rotate(0deg);
     border-radius: 100%;
@@ -26,14 +27,31 @@
 
 .category .v-treeview-node__root .fa-chevron-down::before {
     color: #0066ff;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+    left: 0;
+    margin: auto;
+    display: flex;
+    justify-content: center;
 }
 
 .category .v-sheet.v-card:not(.v-sheet--outlined) {
     box-shadow: none;
 }
+.v-enter-active,
+.v-leave-active {
+    transition: opacity 0.5s ease;
+}
 
+.v-enter-from,
+.v-leave-to {
+    opacity: 0;
+}
 .category .v-treeview-node__root .v-treeview-node__toggle--open {
     transform: rotate(180deg);
+    transition: 0.3s;
 }
 
 .category .v-treeview-node__root .category__field {
@@ -71,11 +89,35 @@
 }
 
 .category .category_field>div {
-    margin-right: 8px;
+
 }
 
 .category .category_field p {
     margin: 0;
+}
+
+.category .category_status {
+    margin: 0 13px;
+    padding: 0;
+    gap: 6px;
+}
+
+.category .category_status li {
+    list-style-type: none;
+    width: 10px;
+    height: 10px;
+    background: red;
+    border-radius: 100%;
+    transition: 0.2s;
+}
+
+.category .category_status li:hover {
+    box-shadow: -1px 3px 6px 0 rgb(0 0 0 / 45%);
+}
+
+.category .category_status p {
+    margin: 0 10px;
+    color: deeppink;
 }
 
 .category .category_subname {
@@ -84,6 +126,7 @@
     white-space: nowrap;
     overflow: hidden !important;
     text-overflow: ellipsis;
+    padding-right: 10px;
     color: #b0b6bf;
 }
 
