@@ -80,8 +80,9 @@ export default {
                 icon: "fa-solid fa-chevron-down",
                 type: "category",
                 edit: true,
+                colors: ['pink', 'yellow', 'orange'],
                 children: [
-                    {id: uuid.v1(), name: "Паспорт", subName: "Для всех", type: "child", edit: true,},
+                    {id: uuid.v1(), name: "Паспорт", subName: "Для всех", type: "child", colors: ['blue'], edit: true,},
                     {id: uuid.v1(), name: "ИНН", subName: "Для всех", type: "child", edit: true,},
                 ],
             },

@@ -4,25 +4,43 @@
       <v-flex mb-5 xs12>
         <v-card>
           <v-card-text class="pa-0">
-            <v-draggable-treeview v-model="items" group="categories"
-                                  @drop.native="dragend($event)" v-click-outside="onClickOutside">
-
+            <v-draggable-treeview
+              v-model="items"
+              group="categories"
+              @drop.native="dragend($event)"
+              v-click-outside="onClickOutside"
+            >
               <template v-slot:label="{ item }">
-                <div>
-                  <input type="text" :id="item.id" :disabled="item.edit" :class="item.edit ? 'disabled' : 'editabled'"
-                         class="category__field" v-model="item.name"/>
-                  <span>111</span>
+                <div class="d-flex align-center category_field">
+                  <div>
+                    <p class="category__field" v-if="item.edit">
+                      sasadsadsadsad
+                    </p>
+                    <form v-else action="">
+                      <input
+                        type="text"
+                        :id="item.id"
+                        :disabled="item.edit"
+                        :class="item.edit ? 'disabled' : 'editabled'"
+                        class="category__field"
+                        v-model="item.name"
+                      />
+                    </form>
+                  </div>
+                  <div>
+
+                  </div>
+                  <p class="m-0 category_subname">{{ item.subName }}</p>
                 </div>
               </template>
 
               <template v-slot:append="{ item }">
-                <Controls :item="item" :type="item.type" handle="handle"/>
+                <Controls :item="item" :type="item.type" handle="handle" />
               </template>
-
             </v-draggable-treeview>
           </v-card-text>
         </v-card>
-        </v-flex>
+      </v-flex>
     </v-layout>
     <pre>{{ items }}</pre>
   </div>
@@ -37,11 +55,11 @@ export default {
   computed: {
     items: {
       get() {
-        return this.$store.getters.items
+        return this.$store.getters.items;
       },
       set(value) {
-        this.$store.commit('updateElements', value)
-      }
+        this.$store.commit("updateElements", value);
+      },
     },
   },
 
@@ -49,15 +67,14 @@ export default {
     Controls,
   },
 
-
   methods: {
     onClickOutside() {
       this.items.forEach((item) => {
-        item.children.forEach(subItem => {
+        item.children.forEach((subItem) => {
           subItem.edit = true;
           item.edit = true;
-        })
-      })
+        });
+      });
     },
     ajouterMenu() {
       // this.items.push({

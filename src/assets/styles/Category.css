@@ -37,7 +37,7 @@
 }
 
 .category .v-treeview-node__root .category__field {
-    width: 50%;
+    width: 100%;
     padding: 5px;
     outline: none;
     color: #000000;
@@ -68,6 +68,23 @@
 .category .editabled {
     font-weight: 600;
     border-bottom: 1px solid;
+}
+
+.category .category_field>div {
+    margin-right: 8px;
+}
+
+.category .category_field p {
+    margin: 0;
+}
+
+.category .category_subname {
+    width: 83%;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    color: #b0b6bf;
 }
 
 .item-sub .category__info {
