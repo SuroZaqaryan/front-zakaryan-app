@@ -1,6 +1,62 @@
-/* .category .v-treeview-node__root .v-treeview-node__toggle {
+.category {
+    width: 60%;
+}
+
+.category .v-treeview-node__root {
+    padding: 0 13px;
+}
+
+.category .v-treeview-node {
+    border: 1px solid #d3d8df;
+}
+
+.category .v-treeview-node:not(:last-child) {
+    border-bottom: 0;
+}
+
+.category .v-treeview-node__root .fa-chevron-down {
+    font-size: 12px;
+    transform: rotate(0deg);
+    border-radius: 100%;
+    width: 25px;
+    height: 25px;
+    border: 1px solid #d3d8df;
+    margin-right: 16px;
+}
+
+.category .v-treeview-node__root .fa-chevron-down::before {
+    color: #0066ff;
+}
+
+.category .v-sheet.v-card:not(.v-sheet--outlined) {
+    box-shadow: none;
+}
+
+.category .v-treeview-node__root .v-treeview-node__toggle--open {
+    transform: rotate(180deg);
+}
+
+.category .v-treeview-node__root input {
+    width: 50%;
+    padding: 5px;
+    outline: none;
+}
+
+.category .v-treeview-node__children .v-treeview-node {
+    padding: 0;
+    border-bottom: 0;
+    border-left: 0;
+    border-right: 0;
+}
+
+.category .v-treeview-node__children .v-treeview-node__level:first-child {
     display: none;
-} */
+}
+
+.category .editabled {
+    font-weight: 600;
+    border-bottom: 1px solid;
+}
 
 .item-sub .category__info {
     border-top: 0;
@@ -77,6 +133,7 @@
 .category__controls {
     display: flex;
     align-items: center;
+    gap: 12px;
 }
 
 .category__controls button {

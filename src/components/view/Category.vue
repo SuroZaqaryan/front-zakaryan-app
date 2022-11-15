@@ -1,77 +1,27 @@
 <template>
   <div class="category">
-    <div>
-      <i class="fa-solid fa-chevron-down"></i>
-    </div>
     <v-layout wrap>
       <v-flex mb-5 xs12>
         <v-card>
-          <v-card-text>
-            <v-draggable-treeview
-              v-model="items"
-              group="categories"
-              :empty-insert-threshhold="500"
-              @drop.native="dragend($event)"
-            >
-              <!-- <template v-slot:prepend="{ item }">
-                <div
-                  @click="test"
-                  style="background: red; width: 20px; height: 20px"
-                >
-                  <v-icon>{{ item.icon }}</v-icon>
-                </div>
-              </template> -->
-
-              <template v-slot:prepend="{ item }">
-                <v-icon>{{ item.icon }}</v-icon>
-              </template>
+          <v-card-text class="pa-0">
+            <v-draggable-treeview v-model="items" group="categories"
+              @drop.native="dragend($event)" v-click-outside="onClickOutside">
 
               <template v-slot:label="{ item }">
-                <span :id="item.id" class="primary--text">{{ item.name }}</span>
+                <input type="text" :id="item.id" :disabled="item.edit" :class="item.edit ? 'disabled' : 'editabled'"
+                  class="primary--text" v-model="item.name" />
               </template>
 
               <template v-slot:append="{ item }">
-
-                <v-tooltip bottom>
-                  <template v-slot:activator="{ on }">
-                    <v-icon
-                      v-on="on"
-                      small
-                      class="mr-2"
-                      @click.stop="ajouter(item)"
-                      v-if="!item.link"
-                    >
-                      mdi-folder
-                    </v-icon>
-                  </template>
-                  <span>Ajouter un menu</span>
-                </v-tooltip>
-
-                <v-tooltip bottom>
-
-                  <template v-slot:activator="{ on }">
-                    <v-icon
-                      v-on="on"
-                      small
-                      class="mr-2"
-                      @click.stop="ajouterSousMenu(item, $event)"
-                      v-if="!item.link"
-                    >
-                      mdi-plus
-                    </v-icon>
-                  </template>
-
-                  <span>Ajouter un sous-menu</span>
-                </v-tooltip>
-                <Controls />
-                <!-- <v-icon small class="mr-2" @click.stop=""> edit </v-icon>
-                <v-icon small class="mr-2" @click.stop=""> mdi-delete </v-icon> -->
+                <Controls :item="item" :type="item.type" handle="handle" />
               </template>
+
             </v-draggable-treeview>
           </v-card-text>
         </v-card>
       </v-flex>
     </v-layout>
+    <pre>{{ items }}</pre>
   </div>
 </template>
 
@@ -80,81 +30,50 @@ import Controls from "./Controls.vue";
 
 export default {
   name: "TestComp",
-  data: () => ({
-    items: [
-      {
-        id: 1,
-        name: "Central League",
-        icon: "fa-solid fa-chevron-down",
-        link: "",
-        children: [
-          { id: 101, name: "Dragons", icon: "", link: "test" },
-          { id: 102, name: "Tigers", icon: "", link: "test" },
-        ],
+
+  computed: {
+    items: {
+      get() {
+        return this.$store.getters.items
       },
-      {
-        id: 2,
-        name: "Pacific League",
-        icon: "fa-solid fa-chevron-down",
-        link: "",
-        children: [
-          {
-            id: 7,
-            name: "Lions",
-            link: "",
-          },
-        ],
-      },
-    ],
-    hoverParent: false,
-    hoverChild: false,
-    i: 0,
-  }),
+      set(value) {
+        this.$store.commit('updateElements', value)
+      }
+    },
+  },
 
   components: {
     Controls,
   },
 
-  computed: {
-    clonedItems: function () {
-      return JSON.parse(JSON.stringify(this.items));
-    },
-  },
 
-  watch: {
-    clonedItems: {
-      deep: true,
-      handler(newVal, oldVal) {
-        console.log(newVal);
-        console.log(oldVal);
-      },
-    },
-  },
   methods: {
-    test() {
-      console.log(1);
+    onClickOutside() {
+      this.items.forEach((item) => {
+        item.children.forEach(subItem => {
+          subItem.edit = true;
+          item.edit = true;
+        })
+      })
     },
     ajouterMenu() {
-      this.items.push({
-        id: 3,
-        name: "Test",
-        icon: "fa-solid fa-chevron-down",
-        link: "",
-        children: [],
-      });
+      // this.items.push({
+      //   id: 3,
+      //   name: "Test",
+      //   icon: "fa-solid fa-chevron-down",
+      //   link: "",
+      //   children: [],
+      // });
     },
     ajouterSousMenu(item, event) {
-      item.children.push({
-        id: 301,
-        name: "Test",
-        icon: "",
-        link: "test",
-        children: [],
-      });
+      // item.children.push({
+      //   id: 301,
+      //   name: "Test",
+      //   icon: "",
+      //   link: "test",
+      //   children: [],
+      // });
       event.target.parentNode.click();
-      console.log(event.target.parentNode.parentNode);
-      console.log(event.target.parentNode);
-      console.log(event.target.parentNode.nextSibling);
     },
     dragstart(event) {
       console.log(event);

@@ -1,61 +1,66 @@
+import {uuid} from "vue-uuid";
+
 export default {
     actions: {
-        updateElements: ({ commit }, payload) => {
+        updateElements: ({commit}, payload) => {
             commit("updateElements", payload);
         },
 
-        openCategory({ commit }, payload) {
-            commit("OPEN_CATEGORY", payload);
-        },
-
-        editCategory({ commit }, payload) {
+        editCategory({commit}, payload) {
             commit("EDIT_CATEGORY", payload)
         },
 
-        deleteCategory({ commit }, payload) {
+        deleteCategory({commit}, payload) {
             commit("DELETE_CATEGORY", payload)
         },
 
-        updateSearch({ commit }, payload) {
+        updateSearch({commit}, payload) {
             commit("UPDATE_SEARCH", payload)
         }
     },
 
     mutations: {
         updateElements: (state, payload) => {
-            state.categories = payload;
-        },
-
-        OPEN_CATEGORY(state, payload) {
-            state.categories.forEach((item, idx) => {
-                if (payload === idx) {
-                    item.open = !item.open;
-                } else {
-                    item.open = false
-                }
-            });
+            state.items = payload;
         },
 
         EDIT_CATEGORY(state, payload) {
             switch (payload.type) {
                 case 'category':
-                    payload.item.edit = false
+                    state.items.forEach(item => {
+                        if (item.id === payload.item.id) {
+                            return item.edit = false
+                        } else {
+                            return item.edit = true
+                        }
+                    })
                     break
-                case 'elem':
-                    payload.itemChild.edit = false
+
+                case 'child':
+                    state.items.forEach((item) => item.children.forEach((subItem) => {
+                        if (subItem.id === payload.item.id) {
+                            return subItem.edit = false
+                        } else {
+                            return subItem.edit = true
+                        }
+                    }))
             }
         },
 
         DELETE_CATEGORY(state, payload) {
-            let parentIdx = state.categories.indexOf(payload.item);
-            let childIdx = payload.item.elems.indexOf(payload.itemChild)
+            let parentIdx = state.items.indexOf(payload.item);
 
             switch (payload.type) {
                 case 'category':
-                    state.categories.splice(parentIdx, 1);
+                    state.items.splice(parentIdx, 1);
                     break
-                case 'elem':
-                    payload.item.elems.splice(childIdx, 1);
+
+                case 'child':
+                    state.items.forEach((item) => item.children.forEach((subItem, index) => {
+                        if (subItem.id === payload.item.id) {
+                            return item.children.splice(index, 1);
+                        }
+                    }));
             }
         },
 
@@ -67,44 +72,45 @@ export default {
     state: {
         searchValue: "",
 
-        categories: [
+        items: [
             {
-                id: 0,
-                title: "about",
-                open: false,
+                id: uuid.v1(),
+                name: "Central League",
+                icon: "fa-solid fa-chevron-down",
+                type: "category",
                 edit: true,
-
-                elems: [{
-                    title: "1",
-
-                },
-                {
-                    title: "2",
-
-                }],
+                children: [
+                    {id: uuid.v1(), name: "Dragons", type: "child", edit: true,},
+                    {id: uuid.v1(), name: "Tigers", type: "child", edit: true,},
+                ],
             },
             {
-                id: 1,
-                title: "services",
-                open: false,
+                id: uuid.v1(),
+                name: "Pacific League",
+                icon: "fa-solid fa-chevron-down",
+                type: "category",
                 edit: true,
-
-                elems: [{
-                    title: "3",
-                },
-                {
-                    title: "4",
-                }],
+                children: [
+                    {id: uuid.v1(), name: "1", type: "child", edit: true,},
+                    {id: uuid.v1(), name: "2", type: "child", edit: true,},
+                    {id: uuid.v1(), name: "3", type: "child", edit: true,},
+                    {id: uuid.v1(), name: "4", type: "child", edit: true,},
+                ],
             },
         ],
     },
 
     getters: {
-        categories(state) {
-            return state.categories.filter(item => {
-                return item.title.toLowerCase().includes(state.searchValue.toLowerCase()) ||
-                    item.elems.some(e => e.title.toLowerCase().includes(state.searchValue.toLowerCase()))
+        search(state) {
+            return state.searchValue
+        },
+
+        items(state) {
+            return state.items.filter(item => {
+                return item.name.toLowerCase().includes(state.searchValue.toLowerCase()) ||
+                    item.children.some(e => e.name.toLowerCase().includes(state.searchValue.toLowerCase()))
             })
         }
     }
 }
+

@@ -1,11 +1,12 @@
 <template>
   <div class="document__search">
     <div>
-      <img class="search" src="@/assets/search.svg" width="17" height="17" alt="search" />
+      <img class="search" src="@/assets/search.svg" width="17" height="17" alt="search"/>
 
-      <input type="text" v-model="search" ref="search" />
+      <input type="text" v-model="search" ref="search"/>
 
-      <img @click="remove" class="remove" src="@/assets/remove.svg" width="21" height="21" alt="remove" />
+      <img v-if="search.length" @click="remove"
+           class="remove" src="@/assets/remove.svg" width="21" height="21" alt="remove"/>
     </div>
   </div>
 </template>
@@ -17,7 +18,7 @@ export default {
   computed: {
     search: {
       get() {
-        return this.$store.state.searchValue
+        return this.$store.getters.search
       },
       set(value) {
         this.$store.dispatch('updateSearch', value)

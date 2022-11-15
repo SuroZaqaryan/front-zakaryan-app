@@ -23,34 +23,23 @@
     </div>
 
     <Search />
-    
-    <Category v-model="categories" />
+
+    <Category />
   </div>
 </template>
 
 <script>
 import Category from "./view/Category.vue";
 import Search from "./view/Search.vue"
+import {mapGetters} from 'vuex'
 
 export default {
   name: "Document",
-
+  computed: mapGetters(["items"]),
   components: {
     Category,
     Search,
   },
-
-  computed: {
-    categories: {
-      get() {
-        return this.$store.getters.categories
-      },
-      set(value) {
-        this.$store.dispatch("updateElements", value);
-      }
-    }
-  }
-
 };
 </script>
 
