@@ -1,3 +1,5 @@
+import { uuid } from 'vue-uuid';
+
 export default {
   actions: {
     updateElements: ({ commit }, payload) => {
@@ -78,8 +80,26 @@ export default {
     },
 
     CREATE_CATEGORY(state, payload) {
-      payload.category["id"] = payload.newId;
-      state.items.push(payload.category);
+      state.items.push({
+        id:  uuid.v1(),
+        name: payload.name,
+        subName: payload.subName,
+        icon: payload.icon,
+        type: "category",
+        edit: true,
+        colors: payload.colors,
+        children: [
+          {
+            id:  uuid.v1(),
+            name: payload.children.name,
+            subName: payload.children.subName,
+            colors: payload.children.colors,
+            type: "child",
+            edit: true,
+            status: false,
+          }
+        ],
+      });
     },
   },
 
@@ -87,90 +107,90 @@ export default {
     searchValue: "",
 
     items: [
-      // {
-      //   id: uuid.v1(),
-      //   name: "Обязательные для всех",
-      //   subName: "Документы, обязательные для всех сотрудников без исключения",
-      //   icon: "fa-solid fa-chevron-down",
-      //   type: "category",
-      //   edit: true,
-      //   colors: ["pink", "yellow", "orange"],
-      //   children: [
-      //     {
-      //       id: uuid.v1(),
-      //       name: "Паспорт",
-      //       subName: "Для всех",
-      //       status: true,
-      //       type: "child",
-      //       colors: ["blue"],
-      //       edit: true,
-      //     },
-      //     {
-      //       id: uuid.v1(),
-      //       name: "ИНН",
-      //       subName: "Для всех",
-      //       status: true,
-      //       type: "child",
-      //       edit: true,
-      //     },
-      //   ],
-      // },
-      // {
-      //   id: uuid.v1(),
-      //   name: "Обязательные для трудоустройства",
-      //   subName:
-      //     "Документы, без которых невозможно трудоустройство человека на какую бы то ни было должность в компании вне зависимости от гргаждан",
-      //   icon: "fa-solid fa-chevron-down",
-      //   type: "category",
-      //   edit: true,
-      //   children: [
-      //     {
-      //       id: uuid.v1(),
-      //       name: "Документ 1",
-      //       subName: "Для всех",
-      //       status: false,
-      //       type: "child",
-      //       edit: true,
-      //     },
-      //     {
-      //       id: uuid.v1(),
-      //       name: "Документ 2",
-      //       subName: "Для всех",
-      //       status: false,
-      //       type: "child",
-      //       edit: true,
-      //     },
-      //     {
-      //       id: uuid.v1(),
-      //       name: "Документ 3",
-      //       subName: "Для всех",
-      //       status: false,
-      //       type: "child",
-      //       edit: true,
-      //     },
-      //     {
-      //       id: uuid.v1(),
-      //       name: "Документ 4",
-      //       subName: "Для всех",
-      //       status: false,
-      //       type: "child",
-      //       edit: true,
-      //     },
-      //   ],
-      // },
-      // {
-      //   id: uuid.v1(),
-      //   name: "Специальные",
-      //   icon: "fa-solid fa-chevron-down",
-      //   type: "category",
-      //   edit: true,
-      //   children: [
-      //     { id: uuid.v1(), name: "Документ 1", type: "child", edit: true },
-      //     { id: uuid.v1(), name: "Документ 2", type: "child", edit: true },
-      //     { id: uuid.v1(), name: "Документ 3", type: "child", edit: true },
-      //     { id: uuid.v1(), name: "Документ 4", type: "child", edit: true },
-      //   ],
-      // },
+      {
+        id: uuid.v1(),
+        name: "Обязательные для всех",
+        subName: "Документы, обязательные для всех сотрудников без исключения",
+        icon: "fa-solid fa-chevron-down",
+        type: "category",
+        edit: true,
+        colors: ["pink", "yellow", "orange"],
+        children: [
+          {
+            id: uuid.v1(),
+            name: "Паспорт",
+            subName: "Для всех",
+            status: true,
+            type: "child",
+            colors: ["blue"],
+            edit: true,
+          },
+          {
+            id: uuid.v1(),
+            name: "ИНН",
+            subName: "Для всех",
+            status: true,
+            type: "child",
+            edit: true,
+          },
+        ],
+      },
+      {
+        id: uuid.v1(),
+        name: "Обязательные для трудоустройства",
+        subName:
+          "Документы, без которых невозможно трудоустройство человека на какую бы то ни было должность в компании вне зависимости от гргаждан",
+        icon: "fa-solid fa-chevron-down",
+        type: "category",
+        edit: true,
+        children: [
+          {
+            id: uuid.v1(),
+            name: "Документ 1",
+            subName: "Для всех",
+            status: false,
+            type: "child",
+            edit: true,
+          },
+          {
+            id: uuid.v1(),
+            name: "Документ 2",
+            subName: "Для всех",
+            status: false,
+            type: "child",
+            edit: true,
+          },
+          {
+            id: uuid.v1(),
+            name: "Документ 3",
+            subName: "Для всех",
+            status: false,
+            type: "child",
+            edit: true,
+          },
+          {
+            id: uuid.v1(),
+            name: "Документ 4",
+            subName: "Для всех",
+            status: false,
+            type: "child",
+            edit: true,
+          },
+        ],
+      },
+      {
+        id: uuid.v1(),
+        name: "Специальные",
+        icon: "fa-solid fa-chevron-down",
+        type: "category",
+        edit: true,
+        children: [
+          { id: uuid.v1(), name: "Документ 1", type: "child", edit: true },
+          { id: uuid.v1(), name: "Документ 2", type: "child", edit: true },
+          { id: uuid.v1(), name: "Документ 3", type: "child", edit: true },
+          { id: uuid.v1(), name: "Документ 4", type: "child", edit: true },
+        ],
+      },
     ],
   },
 
