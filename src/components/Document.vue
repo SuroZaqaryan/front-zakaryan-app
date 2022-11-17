@@ -7,7 +7,12 @@
 
       <div class="document__create">
         <button class="bookmark">
-          <img width="14" height="14" src="../assets/bookmark.svg" alt="bookmark" />
+          <img
+            width="14"
+            height="14"
+            src="../assets/bookmark.svg"
+            alt="bookmark"
+          />
         </button>
 
         <button @click="createCategory">
@@ -21,31 +26,34 @@
         </button>
       </div>
     </div>
-
+    <Modal />
     <Search />
-
     <Category />
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import Category from "./view/Category.vue";
-import Search from "./view/Search.vue"
-import {mapGetters} from 'vuex'
+import Search from "./view/Search.vue";
+import Modal from "./view/Modal.vue";
 
 export default {
   name: "Document",
-  computed: mapGetters(["items"]),
+
   components: {
     Category,
     Search,
+    Modal,
   },
+
+  computed: mapGetters(["items", "showModal"]),
 
   methods: {
     createCategory() {
-      this.$store.dispatch("createCategory")
+      this.$store.dispatch("openModal");
     },
-  }
+  },
 };
 </script>
 

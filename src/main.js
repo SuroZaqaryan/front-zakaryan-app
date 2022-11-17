@@ -3,10 +3,12 @@ import store from "./store";
 import App from "./App.vue";
 import vClickOutside from 'v-click-outside'
 import Vuetify from "vuetify";
+import UUID from 'vue-uuid';
 import VuetifyDraggableTreeview from "./js/vuetify-draggable-treeview";
 import "vuetify/dist/vuetify.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 
+Vue.use(UUID);
 Vue.use(vClickOutside)
 Vue.use(VuetifyDraggableTreeview);
 
