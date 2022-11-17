@@ -5,7 +5,7 @@
         <v-flex mb-5 xs12>
           <v-card>
             <v-card-text class="pa-0">
-              <v-draggable-treeview v-model="items" group="categories" @drop.native="dragend($event)"
+              <v-draggable-treeview v-model="items" group="categories"
                 v-click-outside="onClickOutside">
                 <template v-slot:label="{ item }">
                   <div class="d-flex align-center category_field">
@@ -67,29 +67,13 @@ export default {
   },
 
   methods: {
-    checkColor(color) {
-      switch (color) {
-        case 'red':
-          return
-      }
-    },
-
     onClickOutside() {
       this.items.forEach((item) => {
-        item.children.forEach((subItem) => {
+        item.children?.forEach((subItem) => {
           subItem.edit = true;
           item.edit = true;
         });
       });
-    },
-
-    dragend(event) {
-      let id = event.target.getElementsByClassName("category__field-name")[0].id;
-      if (id !== "") {
-        console.log(id);
-      } else {
-        console.log(event.target);
-      }
     },
   },
 };

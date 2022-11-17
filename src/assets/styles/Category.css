@@ -40,6 +40,7 @@
 .category .v-sheet.v-card:not(.v-sheet--outlined) {
     box-shadow: none;
 }
+
 .v-enter-active,
 .v-leave-active {
     transition: opacity 0.5s ease;
@@ -49,6 +50,7 @@
 .v-leave-to {
     opacity: 0;
 }
+
 .category .v-treeview-node__root .v-treeview-node__toggle--open {
     transform: rotate(180deg);
     transition: 0.3s;
@@ -88,9 +90,6 @@
     border-bottom: 1px solid;
 }
 
-.category .category_field>div {
-
-}
 
 .category .category_field p {
     margin: 0;
@@ -164,7 +163,6 @@
 .category__info button {
     width: 25px;
     min-height: 25px;
-    ;
 }
 
 .category__info button img {
@@ -229,4 +227,11 @@
 
 .category__items ul li:first-child {
     border-top: 0;
+}
+
+pre {
+    margin-top: 2rem;
+    padding: 1rem;
+    background: #fafafa;
+    border: 1px solid #efefef;
 }
