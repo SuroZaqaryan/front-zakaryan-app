@@ -6,7 +6,7 @@
           <v-card>
             <v-card-text class="pa-0">
               <v-draggable-treeview v-model="items" group="categories"
-                v-click-outside="onClickOutside">
+                                    v-click-outside="onClickOutside">
                 <template v-slot:label="{ item }">
                   <div class="d-flex align-center category_field">
                     <div>
@@ -15,7 +15,7 @@
                       </p>
                       <form v-else action="">
                         <input type="text" :id="item.id" :disabled="item.edit"
-                          :class="item.edit ? 'disabled' : 'editabled'" class="category__field" v-model="item.name" />
+                               :class="item.edit ? 'disabled' : 'editabled'" class="category__field" v-model="item.name" />
                       </form>
                     </div>
 

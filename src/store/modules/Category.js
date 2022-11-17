@@ -54,18 +54,23 @@ export default {
 
         DELETE_CATEGORY(state, payload) {
             let parentIdx = state.items.indexOf(payload.item);
-
             switch (payload.type) {
                 case 'category':
                     state.items.splice(parentIdx, 1);
                     break
 
                 case 'child':
-                    state.items.forEach((item) => item.children.forEach((subItem, index) => {
-                        if (subItem.id === payload.item.id) {
-                            return item.children.splice(index, 1);
+                    state.items?.forEach((item, index) => {
+                        if (item.id === payload.item.id) {
+                            return state.items.splice(index, 1);
+                        } else {
+                            item.children?.forEach((subItem, index) => {
+                                if (subItem.id === payload.item.id) {
+                                    return item.children.splice(index, 1);
+                                }
+                            })
                         }
-                    }));
+                    });
             }
         },
 
@@ -113,36 +118,36 @@ export default {
                         colors: ['blue'],
                         edit: true,
                     },
-                    {id: uuid.v1(), name: "ИНН", subName: "Для всех", status: true, type: "child", edit: true,},
+                    // {id: uuid.v1(), name: "ИНН", subName: "Для всех", status: true, type: "child", edit: true,},
                 ],
             },
-            {
-                id: uuid.v1(),
-                name: "Обязательные для трудоустройства",
-                subName: "Документы, без которых невозможно трудоустройство человека на какую бы то ни было должность в компании вне зависимости от гргаждан",
-                icon: "fa-solid fa-chevron-down",
-                type: "category",
-                edit: true,
-                children: [
-                    {id: uuid.v1(), name: "Документ 1", subName: "Для всех", status: false, type: "child", edit: true,},
-                    {id: uuid.v1(), name: "Документ 2", subName: "Для всех", status: false, type: "child", edit: true,},
-                    {id: uuid.v1(), name: "Документ 3", subName: "Для всех", status: false, type: "child", edit: true,},
-                    {id: uuid.v1(), name: "Документ 4", subName: "Для всех", status: false, type: "child", edit: true,},
-                ],
-            },
-            {
-                id: uuid.v1(),
-                name: "Специальные",
-                icon: "fa-solid fa-chevron-down",
-                type: "category",
-                edit: true,
-                children: [
-                    {id: uuid.v1(), name: "Документ 1", type: "child", edit: true,},
-                    {id: uuid.v1(), name: "Документ 2", type: "child", edit: true,},
-                    {id: uuid.v1(), name: "Документ 3", type: "child", edit: true,},
-                    {id: uuid.v1(), name: "Документ 4", type: "child", edit: true,},
-                ],
-            },
+            // {
+            //     id: uuid.v1(),
+            //     name: "Обязательные для трудоустройства",
+            //     subName: "Документы, без которых невозможно трудоустройство человека на какую бы то ни было должность в компании вне зависимости от гргаждан",
+            //     icon: "fa-solid fa-chevron-down",
+            //     type: "category",
+            //     edit: true,
+            //     children: [
+            //         {id: uuid.v1(), name: "Документ 1", subName: "Для всех", status: false, type: "child", edit: true,},
+            //         {id: uuid.v1(), name: "Документ 2", subName: "Для всех", status: false, type: "child", edit: true,},
+            //         {id: uuid.v1(), name: "Документ 3", subName: "Для всех", status: false, type: "child", edit: true,},
+            //         {id: uuid.v1(), name: "Документ 4", subName: "Для всех", status: false, type: "child", edit: true,},
+            //     ],
+            // },
+            // {
+            //     id: uuid.v1(),
+            //     name: "Специальные",
+            //     icon: "fa-solid fa-chevron-down",
+            //     type: "category",
+            //     edit: true,
+            //     children: [
+            //         {id: uuid.v1(), name: "Документ 1", type: "child", edit: true,},
+            //         {id: uuid.v1(), name: "Документ 2", type: "child", edit: true,},
+            //         {id: uuid.v1(), name: "Документ 3", type: "child", edit: true,},
+            //         {id: uuid.v1(), name: "Документ 4", type: "child", edit: true,},
+            //     ],
+            // },
         ],
 
     },
